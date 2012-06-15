@@ -7,16 +7,20 @@
 #    class { 'erlang': version => '14B04' }
 #
 
-class erlang ( $version => "15B01" ) {
+class erlang ( $version = "15B01" ) {
 
     $gpp = $operatingsystem ? {
-      RedHat,CentOS => 'gcc-c++',
-      Debian,Ubuntu => 'g++'
+      RedHat => 'gcc-c++',
+      CentOS => 'gcc-c++',
+      Debian => 'g++',
+      Ubuntu => 'g++',
     }
 
     $openssl = $operatingsystem ? {
-      RedHat,CentOS => 'openssl-devel',
-      Debian,Ubuntu => 'libssl-dev'
+      RedHat => 'openssl-devel',
+      CentOS => 'openssl-devel',
+      Ubuntu => 'libssl-dev',
+      Debian => 'libssl-dev',
     }
 
     package { "ncurses-devel":
@@ -36,17 +40,18 @@ class erlang ( $version => "15B01" ) {
     archive { "erlang$version":
       url => "http://www.erlang.org/download/otp_src_R$version.tar.gz",
       checksum => false,
+      require => Package["ncurses-devel",$openssl, $gpp ]
     }
 
     exec { "configure erlang $version":
       cwd => "/usr/src/otp_src_R$version",
-      command => "bash -c './configure',
-      require => [ Package["ncurses-devel"], Package[$openssl], Package[$gpp], Archive["erlang$version"] ]
+      command => "bash -c './configure'",
+      require => Archive["erlang$version"]
     }
 
     exec { "build and install erlang $version":
       cwd => "/usr/src/otp_src_R$version",
-      command => "bash -c 'make && make install',
+      command => "bash -c 'make && make install'",
       require => Exec["configure erlang $version"],
     }
 
