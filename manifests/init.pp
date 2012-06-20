@@ -40,6 +40,7 @@ class erlang ( $version = "15B01" ) {
     archive { "erlang$version":
       url => "http://www.erlang.org/download/otp_src_R$version.tar.gz",
       checksum => false,
+      target   => "/usr/src",
       require => Package["ncurses-devel",$openssl, $gpp ]
     }
 
