@@ -38,7 +38,7 @@ class erlang ( $version = "15B01" ) {
     include java
 
     archive { "erlang$version":
-      url => "http://www.erlang.org/download/otp_src_R$version.tar.gz",
+      url => "http://www.erlang.org/download/otp_src_R${version}.tar.gz",
       checksum => false,
       target   => "/usr/src",
       require => Package["ncurses-devel",$openssl, $gpp ]
