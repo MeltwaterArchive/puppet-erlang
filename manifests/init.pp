@@ -27,7 +27,7 @@ class erlang ( $version = "15B01" ) {
 
     if !defined(Package[$openssl]) { package { $openssl: ensure => present } }
 
-    if !defined(Package[$gpp]) { package { $gpp: ensure => present } ]
+    if !defined(Package[$gpp]) { package { $gpp: ensure => present } }
 
     include java
 
