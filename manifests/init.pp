@@ -29,8 +29,6 @@ class erlang ( $version = "15B01" ) {
 
     if !defined(Package[$gpp]) { package { $gpp: ensure => present } }
 
-    include java
-
     archive { "erlang$version":
       url => "http://www.erlang.org/download/otp_src_R${version}.tar.gz",
       checksum => false,
@@ -40,7 +38,7 @@ class erlang ( $version = "15B01" ) {
 
     exec { "configure erlang $version":
       cwd => "/usr/src/otp_src_R$version",
-      command => "bash -c './configure'",
+      command => "bash -c './configure --without-javac'",
       require => Archive["erlang$version"]
     }
 
