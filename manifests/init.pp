@@ -23,17 +23,11 @@ class erlang ( $version = "15B01" ) {
       Debian => 'libssl-dev',
     }
 
-    package { "ncurses-devel":
-      ensure => present
-    }
+    if !defined(Package["ncurses-devel"]) { package { "ncurses-devel": ensure => present } }
 
-    package { $openssl:
-      ensure => present
-    }
+    if !defined(Package[$openssl]) { package { $openssl: ensure => present } }
 
-    package { $gpp:
-      ensure => present
-    }
+    if !defined(Package[$gpp]) { package { $gpp: ensure => present } ]
 
     include java
 
