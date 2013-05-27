@@ -9,14 +9,14 @@
 
 class erlang ( $version = "15B01" ) {
 
-    $gpp = $operatingsystem ? {
+    $gpp = $::operatingsystem ? {
       RedHat => 'gcc-c++',
       CentOS => 'gcc-c++',
       Debian => 'g++',
       Ubuntu => 'g++',
     }
 
-    $openssl = $operatingsystem ? {
+    $openssl = $::operatingsystem ? {
       RedHat => 'openssl-devel',
       CentOS => 'openssl-devel',
       Ubuntu => 'libssl-dev',
