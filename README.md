@@ -1,6 +1,18 @@
-puppet-erlang
-=============
+Erlang
+======
 
-puppet module to install erlang from source.
+This module installs Erlang from Erlang Solutions' package repository.
 
-requires meltwater/puppet-java and meltwater/puppet-archive
+Usage
+-----
+To use the latest version available:
+
+    include erlang
+
+To install a specific version:
+
+    class { 'erlang':
+      version => 'R16B02-1',
+    }
+
+To check available package versions, see [the package repository](http://packages.erlang-solutions.com/rpm/centos/).
