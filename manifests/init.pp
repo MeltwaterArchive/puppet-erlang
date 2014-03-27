@@ -38,13 +38,13 @@ class erlang ( $version = '15B01' ) {
 
   exec { "configure erlang ${version}":
     cwd     => "/usr/src/otp_src_R${version}",
-    command => "bash -c './configure --without-javac'",
+    command => 'bash -c \'./configure --without-javac\'',
     require => Archive["erlang${version}"],
   }
 
   exec { "build and install erlang ${version}":
     cwd     => "/usr/src/otp_src_R${version}",
-    command => "bash -c 'make && make install'",
+    command => 'bash -c \'make && make install\'',
     require => Exec["configure erlang ${version}"],
   }
 
